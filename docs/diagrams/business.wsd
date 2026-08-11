@@ -1,4 +1,4 @@
-@startuml
+@startuml business
 skinparam classAttributeIconSize 0
 
 ' ===== LUT =====
@@ -6,6 +6,7 @@ entity "Look Up Table" as LUT {
   - id: Long
   - name: String
   - type: String
+  - is_active: Boolean = true
 }
 
 ' ===== Work Details =====
@@ -14,7 +15,9 @@ class WorkDetails {
   - employment_type: LUT
   - job_title: LUT
   - schedule: JSON
+  - is_active: Boolean
   - branch: Branch
+  - user: User
 }
 
 ' ===== Company =====
@@ -27,6 +30,8 @@ entity Company {
 entity Branch {
   - id: Long
   - name: String
+  - registration_number: String {length = 14}
+  - is_matriz: Boolean = false
   - is_active: Boolean = true
   - company: Company
 }
@@ -36,9 +41,8 @@ entity UserDetails {
   - id: Long
   - name: String
   - last_name: String
-  - individual_identification_number: Long
-  - user_group: LUT
-  - company: Company
+  - identification_number: Long {length = 11}
+  - user_type: LUT
   - user: User
 }
 
@@ -55,83 +59,63 @@ entity User {
 ' ===== Work Log =====
 entity WorkLog {
   - id: Long
-  - time: Time
+  - sequential_registration_number: Long {length = 9}
+  - datetime: Timestamp
+  - fiscal_date: String {length = 8}
+  - fiscal_time: String {length = 4}
   - geolocation: Point
-  - status: String = "OK"
-  - work_log_daily: WorkLogDaily
-}
-
-' ===== Work Log Daily =====
-entity WorkLogDaily {
-  - id: Long
-  - date: Date
-  - total_logs: Integer
-  - total_adjustment: Integer
-  - total_worked: Double
-  - time_bank: Double
+  - status: LUT = "OK"
+  - hash: String {length = 64}
   - user: User
 }
 
 ' ===== Work Log Adjustment =====
 entity WorkLogAdjustment {
   - id: Long
-  - time_adjust: Time
+  - datetime: Timestamp
   - requested_at: Date
-  - status: String = "PENDENT"
+  - status: LUT = "PENDING"
   - rejection_reason: String
   - work_log: WorkLog
-  - user_adjustment: User
+  - authorized_by: User
 }
 
 ' ===== Notification =====
 entity Notification {
   - id: Long
   - text: String
-  - status: String = "UNREAD"
+  - title: LUT
+  - status: LUT = "UNREAD"
   - user: User
-}
-
-' ===== Email Service =====
-class Email {
-  + send(): void
-}
-
-' ===== Report Service =====
-class Report <<service>> {
-  + generateTimeSheet(): PDF
-  + generateTimeBank(): PDF
 }
 
 ' ===== Relationships =====
 
 ' LookUpTable LUT
-LUT "1" o-- "1" WorkDetails
-LUT "1" o-- "1" WorkDetails
-LUT "1" o-- "1" WorkDetails
-LUT "1" o-- "1" UserDetails
+LUT "1" o-- "many" WorkDetails
+LUT "1" o-- "many" UserDetails
+LUT "1" o-- "many" WorkLog
+LUT "1" o-- "many" WorkLogAdjustment
+LUT "1" o-- "many" Notification
 
 ' Company
 Company "1" *-- "many" Branch
 
 ' UserDetails
 UserDetails "1" --* "1" User
-UserDetails "1" --> "many" Company
-
-' User dependencies (dashed)
-User ..> Email
-User ..> Report
+UserDetails "1" --> "many" Branch
 
 ' Notification
-Notification "many" --> "1" User
+Notification "many" --* "1" User
 
 ' WorkDetails
 WorkDetails "1" --o "1" Branch
+WorkDetails "1" --* "1" User
 
-' WorkLogDaily
-WorkLogDaily "1" *-- "many" WorkLog
-WorkLog "1" <-- "many" WorkLogAdjustment
-WorkLogDaily "many" --o "1" User
+' WorkLog
+User "1" *-- "many" WorkLog
+WorkLog "0.1" *-- "many" WorkLogAdjustment
 
 ' WorkLogAdjustment
-WorkLogAdjustment "many" --* "1" User
+WorkLogAdjustment "many" --o "1" User
 @enduml
