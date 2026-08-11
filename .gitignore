@@ -9,10 +9,13 @@ frontend/.svelte-kit
 frontend/build
 
 # OS
+.DS_Store
+Thumbs.db
 frontend/.DS_Store
 frontend/Thumbs.db
 
 # Env
+mise.*
 frontend/mise.*
 frontend/.env.*
 frontend/!.env.example
