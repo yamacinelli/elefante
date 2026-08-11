@@ -26,3 +26,8 @@ backend/!.env.example
 # Vite
 frontend/vite.config.js.timestamp-*
 frontend/vite.config.ts.timestamp-*
+
+# VS Code
+.vscode
+frontend/.vscode
+backend/.vscode
