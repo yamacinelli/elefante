@@ -1,4 +1,13 @@
+# Docs export
+out
+backend/HELP.md
+
+# Build files
 frontend/node_modules
+backend/target/
+backend/.mvn/wrapper/maven-wrapper.jar
+backend/!**/src/main/**/target/
+backend/!**/src/test/**/target/
 
 # Output
 frontend/.output
@@ -13,6 +22,8 @@ frontend/build
 Thumbs.db
 frontend/.DS_Store
 frontend/Thumbs.db
+backend/.DS_Store
+backend/Thumbs.db
 
 # Env
 mise.*
@@ -31,3 +42,28 @@ frontend/vite.config.ts.timestamp-*
 .vscode
 frontend/.vscode
 backend/.vscode
+
+# Eclipse | STS
+backend/.apt_generated
+backend/.classpath
+backend/.factorypath
+backend/.project
+backend/.settings
+backend/.springBeans
+backend/.sts4-cache
+
+# IntelliJ IDEA
+backend/.idea
+backend/*.iws
+backend/*.iml
+backend/*.ipr
+
+# NetBeans
+backend/nbproject/private/
+backend/nbbuild/
+backend/dist/
+backend/nbdist/
+backend/.nb-gradle/
+backend/build/
+backend/!**/src/main/**/build/
+backend/!**/src/test/**/build/
