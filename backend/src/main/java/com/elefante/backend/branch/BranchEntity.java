@@ -7,18 +7,22 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Column;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
 @Entity
 @Table(name = "branchs")
 public class BranchEntity extends BaseEntity {
-	
+
 	@Column(name = "name", nullable = false)
 	private String name;
 
-	@Column(name = "registration_number", unique = true, lenght = 14, nullable = false, updatable = false)
+	@Column(name = "registration_number", unique = true, length = 14, nullable = false, updatable = false)
 	private String registrationNumber;
 
-	@Column(name = "is_active", nullable = false)
-	private Boolean isActive = Boolean.TRUE;	
+	@Column(name = "is_enabled", nullable = false)
+	private Boolean isEnabled = Boolean.TRUE;
 }

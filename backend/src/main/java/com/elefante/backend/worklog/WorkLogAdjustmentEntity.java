@@ -1,24 +1,26 @@
 package com.elefante.backend.worklog;
 
-import com.elefante.backend.base.BaseEntity;
+import com.elefante.backend.base.BaseWorkLogEntity;
+import com.elefante.backend.base.Status;
 
 import java.time.Instant;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Table;
 import jakarta.persistence.Column;
 
-import org.locationtech.jts.geom.Point;
-
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
 @Entity
 @Table(name = "work_log_adjustments")
-public class WorkLogAdjustmentEntity extends BaseEntity {
-	
-	@Column(name = "instant", nullable = false, updatable = false)
-	private Instant instant;
+public class WorkLogAdjustmentEntity extends BaseWorkLogEntity {
 
 	@Column(name = "requested_at", nullable = false, updatable = false)
 	private Instant requestedAt;
@@ -32,9 +34,10 @@ public class WorkLogAdjustmentEntity extends BaseEntity {
 	@Column(name = "message")
 	private String message;
 
-	@Column(name = "work_log_id, nullable = false, updatable = false)
+	@Column(name = "work_log_id", nullable = false, updatable = false)
 	private Integer workLogId;
 
 	@Column(name = "status", nullable = false)
-	private String status;
+	@Enumerated(EnumType.STRING)
+	private Status status;
 }

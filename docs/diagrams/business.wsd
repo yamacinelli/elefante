@@ -1,102 +1,96 @@
 @startuml business
 skinparam classAttributeIconSize 0
 
-' ===== LUT =====
-entity "Look Up Table" as LUT {
-  - id: Long
+' ===== Job =====
+entity "Job" {
+  - id: Integer
   - name: String
-  - type: String
-  - is_active: Boolean = true
+  - is_enabled: Boolean = true
 }
 
 ' ===== Work Details =====
 class WorkDetails {
-  - work_model: LUT
-  - employment_type: LUT
-  - job_title: LUT
+  - work_model: Enum
+  - contract_type: Enum
+  - job: Job
   - schedule: JSON
-  - is_active: Boolean
+  - is_enabled: Boolean
   - branch: Branch
   - user: User
 }
 
 ' ===== Company =====
 entity Company {
-  - id: Long
+  - id: Integer
   - name: String
 }
 
 ' ===== Branch =====
 entity Branch {
-  - id: Long
+  - id: Integer
   - name: String
   - registration_number: String {length = 14}
-  - is_matriz: Boolean = false
-  - is_active: Boolean = true
+  - is_enabled: Boolean = true
   - company: Company
 }
 
 ' ===== User Details =====
 entity UserDetails {
-  - id: Long
+  - id: Integer
   - name: String
   - last_name: String
-  - identification_number: Long {length = 11}
-  - user_type: LUT
+  - identification_number: Integer {length = 11}
+  - user_type: Enum
   - user: User
 }
 
 ' ===== User =====
 entity User {
-  - id: Long
+  - id: Integer
   - email: String
   - password: String
-  - is_superuser: Boolean = false
   - is_first_access: Boolean = true
-  - is_active: Boolean = true
+  - is_enabled: Boolean = true
 }
 
 ' ===== Work Log =====
 entity WorkLog {
-  - id: Long
-  - sequential_registration_number: Long {length = 9}
-  - datetime: Timestamp
+  - id: Integer
+  - sequential_registration_number: Integer {length = 9}
+  - instant: Instant
   - fiscal_date: String {length = 8}
   - fiscal_time: String {length = 4}
   - geolocation: Point
-  - status: LUT = "OK"
+  - status: Enum = "OK"
   - hash: String {length = 64}
   - user: User
 }
 
 ' ===== Work Log Adjustment =====
 entity WorkLogAdjustment {
-  - id: Long
-  - datetime: Timestamp
+  - id: Integer
+  - instant: Instant
   - requested_at: Date
-  - status: LUT = "PENDING"
-  - rejection_reason: String
+  - audit_by: User
+  - audit_at: Instant
+  - message: String
+  - status: Enum = "PENDING"
   - work_log: WorkLog
-  - authorized_by: User
 }
 
 ' ===== Notification =====
 entity Notification {
-  - id: Long
-  - text: String
-  - title: LUT
-  - status: LUT = "UNREAD"
+  - id: Integer
+  - title: Enum
+  - message: String
+  - status: Enum = "UNREAD"
   - user: User
 }
 
 ' ===== Relationships =====
 
-' LookUpTable LUT
-LUT "1" o-- "many" WorkDetails
-LUT "1" o-- "many" UserDetails
-LUT "1" o-- "many" WorkLog
-LUT "1" o-- "many" WorkLogAdjustment
-LUT "1" o-- "many" Notification
+' Job
+Job "1" o-- "many" WorkDetails
 
 ' Company
 Company "1" *-- "many" Branch
