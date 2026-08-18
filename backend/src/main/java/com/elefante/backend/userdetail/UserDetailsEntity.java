@@ -1,4 +1,4 @@
-package com.elefante.backend.user;
+package com.elefante.backend.userdetail;
 
 import com.elefante.backend.base.BaseEntity;
 

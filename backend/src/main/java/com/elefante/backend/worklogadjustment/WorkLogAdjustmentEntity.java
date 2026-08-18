@@ -1,4 +1,4 @@
-package com.elefante.backend.worklog;
+package com.elefante.backend.worklogadjustment;
 
 import com.elefante.backend.base.BaseWorkLogEntity;
 import com.elefante.backend.base.Status;
