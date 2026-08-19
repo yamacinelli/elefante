@@ -4,6 +4,8 @@ import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
 import com.elefante.backend.base.BaseEntity;
+import com.elefante.backend.util.ContractTypeEnum;
+import com.elefante.backend.util.WorkModelEnum;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -24,11 +26,11 @@ public class WorkDetailsEntity extends BaseEntity {
 
     @Column(name = "work_model", nullable = false)
     @Enumerated(EnumType.STRING)
-    private WorkModel workModel;
+    private WorkModelEnum workModel;
 
     @Column(name = "contract_type", nullable = false)
     @Enumerated(EnumType.STRING)
-    private ContractType contractType;
+    private ContractTypeEnum contractType;
 
     @Column(name = "job_id", nullable = false, updatable = false)
     private Integer jobId;

@@ -1,6 +1,6 @@
-package com.elefante.backend.workdetail;
+package com.elefante.backend.util;
 
-public enum ContractType {
+public enum ContractTypeEnum {
     FREELANCE,
     TEMPORARY,
     INDEFINITE,

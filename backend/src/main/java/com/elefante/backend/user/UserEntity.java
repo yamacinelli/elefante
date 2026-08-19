@@ -8,6 +8,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.elefante.backend.base.BaseEntity;
+import com.elefante.backend.util.RoleEnum;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -40,7 +41,7 @@ public class UserEntity extends BaseEntity implements UserDetails {
 
     @Column(name = "role", nullable = false)
     @Enumerated(EnumType.STRING)
-    private Role role;
+    private RoleEnum role;
 
     @Column(name = "is_enabled", nullable = false)
     private Boolean isEnabled = Boolean.TRUE;

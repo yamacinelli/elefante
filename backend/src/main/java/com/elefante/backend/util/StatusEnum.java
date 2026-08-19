@@ -1,6 +1,6 @@
-package com.elefante.backend.base;
+package com.elefante.backend.util;
 
-public enum Status {
+public enum StatusEnum {
     OK,
     PENDING,
     APPROVED,

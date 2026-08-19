@@ -1,7 +1,7 @@
 package com.elefante.backend.worklog;
 
 import com.elefante.backend.base.BaseWorkLogEntity;
-import com.elefante.backend.base.Status;
+import com.elefante.backend.util.StatusEnum;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -46,5 +46,5 @@ public class WorkLogEntity extends BaseWorkLogEntity {
 
 	@Column(name = "status", nullable = false)
 	@Enumerated(EnumType.STRING)
-	private Status status;
+	private StatusEnum status;
 }

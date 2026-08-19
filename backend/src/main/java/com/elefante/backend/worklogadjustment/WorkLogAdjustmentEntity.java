@@ -1,7 +1,7 @@
 package com.elefante.backend.worklogadjustment;
 
 import com.elefante.backend.base.BaseWorkLogEntity;
-import com.elefante.backend.base.Status;
+import com.elefante.backend.util.StatusEnum;
 
 import java.time.Instant;
 
@@ -39,5 +39,5 @@ public class WorkLogAdjustmentEntity extends BaseWorkLogEntity {
 
 	@Column(name = "status", nullable = false)
 	@Enumerated(EnumType.STRING)
-	private Status status;
+	private StatusEnum status;
 }
