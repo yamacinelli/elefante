@@ -70,7 +70,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .claims(extraClaims)
                 .subject(userDetails.getUsername())
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + jwtConfiguration.getExpirationTime()))
+                .expiration(new Date(System.currentTimeMillis() + jwtConfiguration.getJwtExpirationTime()))
                 .signWith(jwtConfiguration.getSigningKey(), Jwts.SIG.HS512)
                 .compact();
     }

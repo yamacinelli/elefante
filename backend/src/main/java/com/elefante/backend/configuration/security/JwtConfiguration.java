@@ -17,16 +17,16 @@ import lombok.Getter;
 public class JwtConfiguration {
 
     @Value("${application.security.jwt.secret-key}")
-    private String secretKey;
+    private String jwtSecretKey;
 
     @Value("${application.security.jwt.expiration-time}")
-    private Long expirationTime;
+    private Long jwtExpirationTime;
 
     private SecretKey signingKey;
 
     @PostConstruct
     public void init() {
-        byte[] decodedKey = Decoders.BASE64.decode(secretKey);
+        byte[] decodedKey = Decoders.BASE64.decode(jwtSecretKey);
         this.signingKey = Keys.hmacShaKeyFor(decodedKey);
     }
 }

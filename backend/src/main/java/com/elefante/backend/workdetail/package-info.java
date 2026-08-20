@@ -1,4 +1,4 @@
 /**
-* Contains classes responsible for the entire <b>work details</b> workflow.
+* Contains classes responsible for the entire <b>work detail</b> workflow.
 */
 package com.elefante.backend.workdetail;
