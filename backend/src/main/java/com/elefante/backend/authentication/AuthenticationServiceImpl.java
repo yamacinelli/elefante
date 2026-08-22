@@ -4,6 +4,17 @@ import java.util.Date;
 import java.util.Map;
 import java.util.function.Function;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.DisabledException;
+import org.springframework.security.authentication.LockedException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -11,13 +22,18 @@ import com.elefante.backend.configuration.security.JwtConfiguration;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
 
+    protected final Log logger = LogFactory.getLog(getClass());
+
     private final JwtConfiguration jwtConfiguration;
+
+    private final AuthenticationManager authenticationManager;
 
     private Claims extractAllClaims(String token) {
         return Jwts
@@ -78,5 +94,24 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     @Override
     public Boolean isTokenValid(String token, UserDetails userDetails) {
         return isTokenUsernameEquals(token, userDetails.getUsername()) && isTokenNonExpired(token);
+    }
+
+    @Override
+    public ResponseEntity<?> signIn(SignInRequest request) {
+        try {
+            Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(request.email(), request.password())
+            );
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+
+            return ResponseEntity.ok(Map.of("token", generateToken(null, userDetails)));
+        } catch (BadCredentialsException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        } catch (DisabledException | LockedException e) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        } catch (Exception e) {
+            logger.error("An error occurred during sign-in for "+ request.email(), e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 }

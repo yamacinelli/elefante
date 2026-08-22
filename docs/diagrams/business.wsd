@@ -40,7 +40,6 @@ entity UserDetails {
   - name: String
   - last_name: String
   - identification_number: Integer {length = 11}
-  - user_type: Enum
   - user: User
 }
 
@@ -49,6 +48,7 @@ entity User {
   - id: Integer
   - email: String
   - password: String
+  - role: Enum
   - is_first_access: Boolean = true
   - is_enabled: Boolean = true
 }

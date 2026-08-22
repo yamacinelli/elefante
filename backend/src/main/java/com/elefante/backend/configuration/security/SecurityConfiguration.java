@@ -25,7 +25,7 @@ public class SecurityConfiguration {
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(
                 authz -> authz
-                    .requestMatchers("/register/**", "/auth/**").permitAll()
+                    .requestMatchers("/auth/**").permitAll()
                     .requestMatchers("/branch/**").hasRole("ADMIN")
                     .requestMatchers("/user/**", "/work-log-adjustment/**").hasAnyRole("ADMIN", "HUMAN_RESOURCES")
                     .anyRequest().authenticated()

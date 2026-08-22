@@ -16,12 +16,12 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Table;
 
-import jakarta.validation.constraints.Size;
-
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+@Builder
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
@@ -32,10 +32,10 @@ public class UserEntity extends BaseEntity implements UserDetails {
     @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "password", nullable = false)
-    @Size(min = 8)
+    @Column(name = "password", length = 60, nullable = false)
     private String password;
 
+    @Builder.Default
     @Column(name = "is_first_access", nullable = false)
     private Boolean isFirstAccess = Boolean.TRUE;
 
@@ -43,6 +43,7 @@ public class UserEntity extends BaseEntity implements UserDetails {
     @Enumerated(EnumType.STRING)
     private RoleEnum role;
 
+    @Builder.Default
     @Column(name = "is_enabled", nullable = false)
     private Boolean isEnabled = Boolean.TRUE;
 
