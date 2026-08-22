@@ -17,8 +17,8 @@ public class UserController {
 
     private final UserService userService;
 
-    @PostMapping("/to-add")
-    public ResponseEntity<?> toAdd(@Valid @RequestBody CreateRequest request) {
-        return userService.toAdd(request);
+    @PostMapping("/invite")
+    public ResponseEntity<?> invite(@Valid @RequestBody InviteRequest request) {
+        return userService.invite(request);
     }
 }
