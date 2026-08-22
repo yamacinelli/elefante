@@ -81,7 +81,6 @@ entity WorkLogAdjustment {
 ' ===== Notification =====
 entity Notification {
   - id: Integer
-  - title: Enum
   - message: String
   - status: Enum = "UNREAD"
   - user: User
