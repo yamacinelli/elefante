@@ -30,6 +30,7 @@ import lombok.RequiredArgsConstructor;
 public class AuthenticationFilter extends OncePerRequestFilter {
 
     private final AuthenticationService authenticationService;
+
     private final UserDetailsService userDetailsService;
 
     @Override
@@ -40,24 +41,19 @@ public class AuthenticationFilter extends OncePerRequestFilter {
     ) throws ServletException, IOException {
         try {
             final Cookie tokenCookie = WebUtils.getCookie(request, "token");
-
             if (Objects.nonNull(tokenCookie)) {
                 final String token = tokenCookie.getValue();
-
                 if (Objects.nonNull(token)) {
                     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
                     String username = authenticationService.extractUsername(token);
-
                     if (Objects.isNull(authentication) && Objects.nonNull(username)) {
                         UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-
                         if (authenticationService.isTokenValid(token, userDetails)) {
                             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                                 userDetails,
                                 null,
                                 userDetails.getAuthorities()
                             );
-
                             authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                             SecurityContextHolder.getContext().setAuthentication(authenticationToken);
                         }
@@ -67,7 +63,6 @@ public class AuthenticationFilter extends OncePerRequestFilter {
         } catch(Exception exception) {
             logger.error("Filter exception: " + exception.getMessage(), exception);
         }
-
         filterChain.doFilter(request, response);
     }
 }

@@ -32,15 +32,7 @@ public class SetupServiceImpl implements SetupService {
     public ResponseEntity<?> setup(SetupRequest request) {
         if (userService.anyUserExists()) {
             try {
-                UserEntity userEntity = UserEntity
-                    .builder()
-                    .email(request.email())
-                    .password(request.password())
-                    .role(RoleEnum.ADMIN)
-                    .isFirstAccess(Boolean.FALSE)
-                    .build();
-                userService.save(userEntity);
-
+                userService.create(request);
                 return ResponseEntity.status(HttpStatus.CREATED).build();
             } catch (Exception e) {
                 logger.error("An error occurred while setup", e);

@@ -9,18 +9,16 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import lombok.RequiredArgsConstructor;
-
-@RequiredArgsConstructor
 @EnableWebSecurity
 @Configuration
 public class SecurityConfiguration {
 
-    private final AuthenticationProvider authenticationProvider;
-    private final AuthenticationFilter authenticationFilter;
-
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+    public SecurityFilterChain securityFilterChain(
+        AuthenticationProvider authenticationProvider,
+        AuthenticationFilter authenticationFilter,
+        HttpSecurity httpSecurity
+    ) throws Exception {
         httpSecurity
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(
