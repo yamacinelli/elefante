@@ -42,8 +42,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Boolean anyUserExists() {
-        return userRepository.existsBy();
+    public Boolean noneUserExists() {
+        return !userRepository.existsBy();
     }
 
     private Optional<UserEntity> create(String email, String password, String role) throws DuplicateKeyException, Exception {

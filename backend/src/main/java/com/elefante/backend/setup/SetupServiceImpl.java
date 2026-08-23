@@ -23,12 +23,12 @@ public class SetupServiceImpl implements SetupService {
 
     @Override
     public ResponseEntity<?> needsSetup() {
-        return ResponseEntity.status(HttpStatus.OK).body(Map.of("needsSetup", !userService.anyUserExists()));
+        return ResponseEntity.status(HttpStatus.OK).body(Map.of("needsSetup", userService.noneUserExists()));
     }
 
     @Override
     public ResponseEntity<?> setup(SetupRequest request) {
-        if (userService.anyUserExists()) {
+        if (userService.noneUserExists()) {
             try {
                 userService.create(request);
                 return ResponseEntity.status(HttpStatus.CREATED).build();

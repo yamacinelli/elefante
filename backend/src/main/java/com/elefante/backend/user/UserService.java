@@ -7,7 +7,7 @@ import com.elefante.backend.setup.SetupRequest;
 
 public interface UserService {
     UserDetails findByEmail(String email);
-    Boolean anyUserExists();
+    Boolean noneUserExists();
     ResponseEntity<?> create(SetupRequest request);
     ResponseEntity<?> update(UserUpdateRequest request);
     ResponseEntity<?> invite(UserInviteRequest request);
