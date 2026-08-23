@@ -9,9 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.elefante.backend.user.UserEntity;
 import com.elefante.backend.user.UserService;
-import com.elefante.backend.util.RoleEnum;
 
 import lombok.RequiredArgsConstructor;
 
@@ -25,7 +23,7 @@ public class SetupServiceImpl implements SetupService {
 
     @Override
     public ResponseEntity<?> needsSetup() {
-        return ResponseEntity.status(HttpStatus.OK).body(Map.of("needsSetup", userService.anyUserExists()));
+        return ResponseEntity.status(HttpStatus.OK).body(Map.of("needsSetup", !userService.anyUserExists()));
     }
 
     @Override

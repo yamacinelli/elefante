@@ -2,7 +2,6 @@ package com.elefante.backend.configuration.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -15,7 +14,6 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain securityFilterChain(
-        AuthenticationProvider authenticationProvider,
         AuthenticationFilter authenticationFilter,
         HttpSecurity httpSecurity
     ) throws Exception {
@@ -23,13 +21,12 @@ public class SecurityConfiguration {
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(
                 authz -> authz
-                    .requestMatchers("/auth/**").permitAll()
+                    .requestMatchers("/setup/**", "/auth/**").permitAll()
                     .requestMatchers("/branch/**").hasRole("ADMIN")
                     .requestMatchers("/user/**", "/work-log-adjustment/**").hasAnyRole("ADMIN", "HUMAN_RESOURCES")
                     .anyRequest().authenticated()
             )
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .authenticationProvider(authenticationProvider)
             .addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class);
         return httpSecurity.build();
     }
