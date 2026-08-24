@@ -38,15 +38,14 @@ public class MailServiceImpl implements MailService {
 
     @Override
     public void sendSetup(String... to) throws IOException, MessagingException {
-        String template = loadTemplate("templates/mail/welcome.html");
+        String template = loadTemplate("templates/mail/setup.html");
         String html = String.format(template, urlFrontend);
-        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
         mimeMessageHelper.setTo(to);
         mimeMessageHelper.setSubject("Confirm your email");
         mimeMessageHelper.setText(html, true);
-        javaMailSender.send(simpleMailMessage);
+        javaMailSender.send(mimeMessage);
     }
 
     @Override
