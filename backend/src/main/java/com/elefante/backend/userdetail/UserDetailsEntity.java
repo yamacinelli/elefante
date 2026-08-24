@@ -26,7 +26,7 @@ public class UserDetailsEntity extends BaseEntity {
     private String lastName;
 
     @Column(name = "identification_number", unique = true, length = 11, nullable = false, updatable = false)
-    private Integer identificationNumber;
+    private Long identificationNumber;
 
     @Column(name = "user_id", nullable = false, updatable = false)
     private Integer userId;
