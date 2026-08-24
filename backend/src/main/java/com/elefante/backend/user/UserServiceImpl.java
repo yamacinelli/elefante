@@ -85,7 +85,7 @@ public class UserServiceImpl implements UserService {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         } catch(DataIntegrityViolationException e) {
             logger.error("An account already exists with this email", e);
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
         } catch(Exception e) {
             logger.error("An error occurred while updating user for " + request.id(), e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
@@ -101,7 +101,7 @@ public class UserServiceImpl implements UserService {
             return ResponseEntity.status(HttpStatus.CREATED).build();
         } catch(DataIntegrityViolationException e) {
             logger.error("An account already exists with this email or identification number", e);
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
         } catch(Exception e) {
             logger.error("An error occurred while creating invited user for " + request.email(), e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();

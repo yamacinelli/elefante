@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,6 +35,9 @@ public class BranchServiceImpl implements BranchService {
         try {
             create(request.name(), request.registrationNumber());
             return ResponseEntity.status(HttpStatus.CREATED).build();
+        } catch(DataIntegrityViolationException e) {
+            logger.error("An branch already exists with this registration number", e);
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
         } catch(Exception e) {
             logger.error("An error occurred creating branch", e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
