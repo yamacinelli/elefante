@@ -19,7 +19,7 @@ public class Schedule {
     private Integer weeklyHours;
 
     @JsonProperty("shift_schedules")
-    private List<ShiftDetails> shiftSchedules;
+    private List<ShiftDetails> shiftDetails;
 
     @NoArgsConstructor
     @AllArgsConstructor
