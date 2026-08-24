@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService {
             .builder()
             .email(email)
             .password(passwordEncoder.encode(password))
-            .role(RoleEnum.valueOf(role))
+            .role(RoleEnum.valueOf(role.toUpperCase()))
             .build();
         return Optional.ofNullable(userRepository.save(userEntity));
     }
@@ -60,7 +60,7 @@ public class UserServiceImpl implements UserService {
         UserEntity userEntity = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User with id " + id + " not found"));
         if (!Objects.equals(email, userEntity.getEmail())) userEntity.setEmail(email);
         if (StringUtils.hasText(password)) userEntity.setPassword(passwordEncoder.encode(password));
-        if (StringUtils.hasText(role) && !Objects.equals(RoleEnum.valueOf(role), userEntity.getRole())) userEntity.setRole(RoleEnum.valueOf(role));
+        if (StringUtils.hasText(role) && !Objects.equals(RoleEnum.valueOf(role), userEntity.getRole())) userEntity.setRole(RoleEnum.valueOf(role.toUpperCase()));
         return Optional.ofNullable(userRepository.save(userEntity));
     }
 

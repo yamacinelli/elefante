@@ -13,10 +13,12 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Table;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+@Builder
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
@@ -32,15 +34,16 @@ public class WorkDetailsEntity extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private ContractTypeEnum contractType;
 
-    @Column(name = "job_id", nullable = false, updatable = false)
-    private Integer jobId;
-
     @Column(name = "schedule", columnDefinition = "JSON", nullable = false)
     @JdbcTypeCode(SqlTypes.JSON)
     private Schedule schedule;
 
+    @Builder.Default
     @Column(name = "is_enabled", nullable = false)
-    private Boolean isEnabled;
+    private Boolean isEnabled = Boolean.TRUE;
+
+    @Column(name = "job_id", nullable = false, updatable = false)
+    private Integer jobId;
 
     @Column(name = "branch_id", nullable = false, updatable = false)
     private Integer branchId;
