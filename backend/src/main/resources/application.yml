@@ -16,6 +16,17 @@ spring:
         jdbc:
           time_zone: UTC
     defer-datasource-initialization: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
   sql:
     init:
       mode: always
@@ -25,3 +36,5 @@ application:
     jwt:
       secret-key: ${JWT_SECRET_KEY}
       expiration-time: ${JWT_EXPIRATION_TIME}
+  url:
+    frontend: ${URL_FRONTEND}

@@ -18,10 +18,12 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import com.elefante.backend.exception.ResourceNotFoundException;
+import com.elefante.backend.mail.MailService;
 import com.elefante.backend.setup.SetupRequest;
 import com.elefante.backend.userdetail.UserDetailsService;
 import com.elefante.backend.util.RoleEnum;
 
+import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -35,6 +37,8 @@ public class UserServiceImpl implements UserService {
     private final UserDetailsService userDetailsService;
 
     private final UserRepository userRepository;
+
+    private final MailService mailService;
 
     @Override
     public UserDetails findByEmail(String email) {
@@ -64,11 +68,16 @@ public class UserServiceImpl implements UserService {
         return Optional.ofNullable(userRepository.save(userEntity));
     }
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public ResponseEntity<?> create(SetupRequest request) {
         try {
             create(request.email(), request.password(), RoleEnum.ADMIN.name());
+            mailService.sendSetup(request.email());
             return ResponseEntity.status(HttpStatus.CREATED).build();
+        } catch(MessagingException e) {
+            logger.error("An error occurred while sending e-mail", e);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         } catch(Exception e) {
             logger.error("An error occurred while setup", e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
@@ -98,6 +107,7 @@ public class UserServiceImpl implements UserService {
         try {
             UserEntity userEntity = create(request.email(), request.tmpPassword(), request.role()).orElseThrow();
             userDetailsService.create(userEntity.getId(), request);
+            mailService.sendWelcome(request.email());
             return ResponseEntity.status(HttpStatus.CREATED).build();
         } catch(DataIntegrityViolationException e) {
             logger.error("An account already exists with this email or identification number", e);
