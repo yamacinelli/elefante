@@ -23,7 +23,7 @@ public class SecurityConfiguration {
                 authz -> authz
                     .requestMatchers("/setup/**", "/auth/**").permitAll()
                     .requestMatchers("/branch/**").hasRole("ADMIN")
-                    .requestMatchers("/user/**", "/work-log-adjustment/**").hasAnyRole("ADMIN", "HUMAN_RESOURCES")
+                    .requestMatchers("/user/**", "/job/**", "/work-details/**", "/work-log-adjustment/**").hasAnyRole("ADMIN", "HUMAN_RESOURCES")
                     .anyRequest().authenticated()
             )
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

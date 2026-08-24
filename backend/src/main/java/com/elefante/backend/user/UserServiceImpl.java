@@ -90,7 +90,7 @@ public class UserServiceImpl implements UserService {
             update(request.id(), request.email(), request.password(), request.role());
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         } catch(ResourceNotFoundException e) {
-           logger.error(e.getMessage(), e);
+            logger.error(e.getMessage(), e);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         } catch(DataIntegrityViolationException e) {
             logger.error("An account already exists with this email", e);
