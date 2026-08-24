@@ -2,6 +2,7 @@ package com.elefante.backend.userdetail;
 
 import java.util.Optional;
 
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
 import com.elefante.backend.user.UserInviteRequest;
@@ -15,7 +16,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private final UserDetailsRepository userDetailsRepository;
 
     @Override
-    public Optional<UserDetailsEntity> create(Integer userId, UserInviteRequest request) {
+    public Optional<UserDetailsEntity> create(Integer userId, UserInviteRequest request) throws DuplicateKeyException, Exception {
         UserDetailsEntity userDetailsEntity = UserDetailsEntity
             .builder()
             .name(request.name())

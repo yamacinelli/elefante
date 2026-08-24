@@ -5,11 +5,12 @@ import com.elefante.backend.base.BaseEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.persistence.Column;
-
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+@Builder
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)

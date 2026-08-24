@@ -68,10 +68,7 @@ public class UserServiceImpl implements UserService {
     public ResponseEntity<?> create(SetupRequest request) {
         try {
             create(request.email(), request.password(), RoleEnum.ADMIN.name());
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-        } catch(ResourceNotFoundException e) {
-           logger.error(e.getMessage(), e);
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            return ResponseEntity.status(HttpStatus.CREATED).build();
         } catch(Exception e) {
             logger.error("An error occurred while setup", e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
