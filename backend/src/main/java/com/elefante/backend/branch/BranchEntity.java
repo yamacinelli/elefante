@@ -24,6 +24,7 @@ public class BranchEntity extends BaseEntity {
 	@Column(name = "registration_number", unique = true, length = 14, nullable = false, updatable = false)
 	private String registrationNumber;
 
+	@Builder.Default
 	@Column(name = "is_enabled", nullable = false)
 	private Boolean isEnabled = Boolean.TRUE;
 }

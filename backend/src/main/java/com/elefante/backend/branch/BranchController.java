@@ -11,7 +11,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-@RequestMapping(name = "branch")
+@RequestMapping("branch")
 @RestController
 public class BranchController {
 
