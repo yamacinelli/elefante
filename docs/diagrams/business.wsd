@@ -39,7 +39,7 @@ entity UserDetails {
   - id: Integer
   - name: String
   - last_name: String
-  - identification_number: Integer {length = 11}
+  - identification_number: String {length = 11}
   - user: User
 }
 
