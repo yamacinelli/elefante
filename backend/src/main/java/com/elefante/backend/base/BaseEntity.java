@@ -8,11 +8,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 
 import lombok.Data;
+import lombok.experimental.SuperBuilder;
 
 /**
  * Simple JavaBean domain object with an id property. Used as a base class for objects
  * needing this property.
  */
+@SuperBuilder
 @Data
 @MappedSuperclass
 public class BaseEntity implements Serializable {

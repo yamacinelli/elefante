@@ -16,13 +16,13 @@ import lombok.ToString;
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @Entity
-@Table(name = "jobs")
+@Table(name = "cargo")
 public class JobEntity extends BaseEntity {
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "nome", nullable = false)
     private String name;
 
     @Builder.Default
-    @Column(name = "is_enabled", nullable = false)
+    @Column(name = "ativo", nullable = false)
     private Boolean isEnabled = Boolean.TRUE;
 }
