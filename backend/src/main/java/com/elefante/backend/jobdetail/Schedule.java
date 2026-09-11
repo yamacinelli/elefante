@@ -14,7 +14,9 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Schedule {
 
-    private Integer weeklyHours;
+    private Integer dailyMinutes;
+
+    private Integer weeklyMinutes;
 
     private List<ShiftDetails> shiftDetails;
 
