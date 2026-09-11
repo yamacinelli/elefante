@@ -20,10 +20,9 @@ import org.springframework.util.StringUtils;
 import com.elefante.backend.exception.ResourceNotFoundException;
 import com.elefante.backend.mail.MailService;
 import com.elefante.backend.setup.SetupRequest;
-import com.elefante.backend.userdetail.UserDetailsService;
-import com.elefante.backend.util.RoleEnum;
 
 import jakarta.mail.MessagingException;
+
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -33,8 +32,6 @@ public class UserServiceImpl implements UserService {
     protected final Log logger = LogFactory.getLog(getClass());
 
     private final PasswordEncoder passwordEncoder;
-
-    private final UserDetailsService userDetailsService;
 
     private final UserRepository userRepository;
 
@@ -105,8 +102,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public ResponseEntity<?> invite(UserInviteRequest request) {
         try {
-            UserEntity userEntity = create(request.email(), request.tmpPassword(), request.role()).orElseThrow();
-            userDetailsService.create(userEntity.getId(), request);
+            create(request.email(), request.tmpPassword(), request.role()).orElseThrow();
             mailService.sendWelcome(request.email());
             return ResponseEntity.status(HttpStatus.CREATED).build();
         } catch(DataIntegrityViolationException e) {

@@ -1,7 +1,6 @@
 package com.elefante.backend.notification;
 
 import com.elefante.backend.base.BaseEntity;
-import com.elefante.backend.util.StatusEnum;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -12,12 +11,14 @@ import jakarta.persistence.Column;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 
+@SuperBuilder
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @Entity
-@Table(name = "notifications")
+@Table(name = "notification")
 public class NotificationEntity extends BaseEntity {
 
 	@Column(name = "message", nullable = false, updatable = false)
@@ -28,5 +29,5 @@ public class NotificationEntity extends BaseEntity {
 
 	@Column(name = "status", nullable = false)
 	@Enumerated(EnumType.STRING)
-	private StatusEnum status;
+	private NotificationStatusEnum status;
 }

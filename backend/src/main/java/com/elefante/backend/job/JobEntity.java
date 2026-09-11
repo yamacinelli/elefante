@@ -10,19 +10,20 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 
-@Builder
+@SuperBuilder
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @Entity
-@Table(name = "cargo")
+@Table(name = "job")
 public class JobEntity extends BaseEntity {
 
-    @Column(name = "nome", nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
     @Builder.Default
-    @Column(name = "ativo", nullable = false)
+    @Column(name = "is_enabled", nullable = false)
     private Boolean isEnabled = Boolean.TRUE;
 }

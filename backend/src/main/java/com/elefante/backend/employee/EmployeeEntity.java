@@ -12,31 +12,32 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 
-@Builder
+@SuperBuilder
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @Entity
-@Table(name = "empregado")
+@Table(name = "employee")
 public class EmployeeEntity extends BaseEntity {
 
-    @Column(name = "nome", nullable = false, updatable = false)
+    @Column(name = "name", nullable = false, updatable = false)
     private String name;
 
     @Column(name = "cpf", unique = true, length = 11, nullable = false, updatable = false)
-    private String documentNumber;
+    private String cpf;
 
     @Builder.Default
-    @Column(name = "data_admissao", nullable = false, updatable = false)
+    @Column(name = "hiring_date", nullable = false, updatable = false)
     private LocalDate hiringDate = LocalDate.now();
 
-    @Column(name = "cargo_id", nullable = false)
-    private Integer jobId;
-
-    @Column(name = "usuario_id", nullable = false, updatable = false)
+    @Column(name = "user_id", nullable = false, updatable = false)
     private Integer userId;
 
-    @Column(name = "empregador_id", nullable = false, updatable = false)
+    @Column(name = "job_id", nullable = false)
+    private Integer jobId;
+
+    @Column(name = "employer_id", nullable = false, updatable = false)
     private Integer employerId;
 }

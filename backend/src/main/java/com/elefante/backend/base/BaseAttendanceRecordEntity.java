@@ -5,10 +5,10 @@ import java.time.Instant;
 import org.locationtech.jts.geom.Point;
 
 import com.elefante.backend.util.CollectorIdentifierEnum;
-import com.elefante.backend.util.ConnectivityStateEnum;
-import com.elefante.backend.util.RecordTypeEnum;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.MappedSuperclass;
 
 import lombok.Builder;
@@ -24,22 +24,17 @@ import lombok.experimental.SuperBuilder;
 @MappedSuperclass
 public class BaseAttendanceRecordEntity extends BaseEntity {
 
-    @Column(name = "data_hora_registro", nullable = false, updatable = false)
+    @Column(name = "record_instant", nullable = false, updatable = false)
 	private Instant recordInstant;
 
+	@Column(name = "persist_instant", nullable = false, updatable = false)
+	private Instant persistInstant;
+
 	@Builder.Default
-	@Column(name = "data_hora_gravacao", nullable = false, updatable = false)
-	private Instant persistInstant = Instant.now();
+	@Column(name = "collector_identifier", length = 2, nullable = false, updatable = false)
+	@Enumerated(EnumType.ORDINAL)
+	private CollectorIdentifierEnum collectorIdentifier = CollectorIdentifierEnum.BROWSER;
 
-	@Column(name = "tipo_registro", nullable = false, updatable = false)
-	private RecordTypeEnum recordType;
-
-	@Column(name = "estado_conexao", nullable = false, updatable = false)
-	private ConnectivityStateEnum connectivityState;
-
-	@Column(name = "identificador_coletor", nullable = false, updatable = false)
-	private CollectorIdentifierEnum collectorIdentifier;
-
-	@Column(name = "coordenada", columnDefinition = "POINT", nullable = false, updatable = false)
+	@Column(name = "coordinate", columnDefinition = "POINT", nullable = false, updatable = false)
 	private Point coordinate;
 }
