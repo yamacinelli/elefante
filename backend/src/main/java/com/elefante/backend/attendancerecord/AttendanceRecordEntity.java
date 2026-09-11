@@ -4,7 +4,6 @@ import java.time.Instant;
 
 import org.locationtech.jts.geom.Point;
 
-import com.elefante.backend.base.BaseAttendanceRecordEntity;
 import com.elefante.backend.base.BaseEntity;
 import com.elefante.backend.util.CollectorIdentifierEnum;
 
