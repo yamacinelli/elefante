@@ -41,6 +41,21 @@ public class AttendanceRecordEntity extends BaseEntity {
 	@Column(name = "coordinate", columnDefinition = "POINT", nullable = false, updatable = false)
 	private Point coordinate;
 
+	@Column(name = "nsr", unique = true, length = 9, nullable = false, updatable = false)
+	private String nsr;
+
+	/**
+     * SHA-256 from itself row's fields
+     */
+    @Column(name = "hash", length = 64, nullable = false, updatable = false)
+	private String hash;
+
+    /**
+     * SHA-256 from previous row (NSR - 1)
+     */
+    @Column(name = "previous_hash", length = 64, updatable = false)
+	private String previousHash;
+
 	@Column(name = "employee_id", nullable = false, updatable = false)
 	private Integer employeeId;
 }
