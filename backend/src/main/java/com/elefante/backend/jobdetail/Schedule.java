@@ -26,7 +26,7 @@ public class Schedule {
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class ShiftDetails {
 
-        private String dayOfWeek; // e.g., "MONDAY"
+        private String dayOfWeek; // e.g., "mon"
 
         private String startTime; // e.g., "07:30"
 

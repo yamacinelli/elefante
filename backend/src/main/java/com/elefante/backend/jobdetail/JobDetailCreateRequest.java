@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 public record JobDetailCreateRequest(
     @NotBlank String workModel,
@@ -15,17 +16,20 @@ public record JobDetailCreateRequest(
 ) {
 
     record Schedule(
-        @NotNull Integer weeklyHours,
+        @NotNull Integer dailyMinutes,
+        @NotNull Integer weeklyMinutes,
         @NotEmpty List<ShiftDetails> shiftDetails
     ) {
 
         record ShiftDetails(
-            @NotBlank String dayOfWeek,
             @NotBlank
-            @Pattern(regexp = "^([01]\\d|2[0-3]):[0-5]\\d$", message = "Time must be in HH:mm format (e.g. 07:30)")
+            @Size(min = 3, max = 3, message = "Day must have 3 chars (e.g., mon)")
+            String dayOfWeek,
+            @NotBlank
+            @Pattern(regexp = "^([01]\\d|2[0-3]):[0-5]\\d$", message = "Time must be in HH:mm format (e.g., 07:30)")
             String startTime,
             @NotBlank
-            @Pattern(regexp = "^([01]\\d|2[0-3]):[0-5]\\d$", message = "Time must be in HH:mm format (e.g. 17:30)")
+            @Pattern(regexp = "^([01]\\d|2[0-3]):[0-5]\\d$", message = "Time must be in HH:mm format (e.g., 17:30)")
             String endTime,
             @NotNull Integer breakMinutes
         ) { }
