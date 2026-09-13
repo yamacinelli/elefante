@@ -27,7 +27,7 @@ public class JobDetailEntity extends BaseEntity {
 
     @Column(name = "work_model", nullable = false)
     @Enumerated(EnumType.STRING)
-    private WorkModelEnum workModel;
+    private JobModelEnum workModel;
 
     @Column(name = "contract_type", nullable = false)
     @Enumerated(EnumType.STRING)

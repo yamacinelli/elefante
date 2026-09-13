@@ -27,7 +27,7 @@ public class JobDetailServiceImpl implements JobDetailService {
             Schedule schedule = objectMapper.convertValue(request.schedule(), Schedule.class);
             JobDetailEntity workDetailsEntity = JobDetailEntity
                 .builder()
-                .workModel(WorkModelEnum.valueOf(request.workModel().toUpperCase()))
+                .workModel(JobModelEnum.valueOf(request.workModel().toUpperCase()))
                 .contractType(ContractTypeEnum.valueOf(request.contractType().toUpperCase()))
                 .schedule(schedule)
                 .employeeId(request.employeeId())

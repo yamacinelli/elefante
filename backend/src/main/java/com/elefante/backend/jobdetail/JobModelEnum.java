@@ -1,6 +1,6 @@
 package com.elefante.backend.jobdetail;
 
-public enum WorkModelEnum {
+public enum JobModelEnum {
     ON_SITE,
     HYBRID,
     REMOTE
