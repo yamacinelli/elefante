@@ -2,8 +2,6 @@ package com.elefante.backend.attendancerecord;
 
 import java.time.Instant;
 
-import org.locationtech.jts.geom.Point;
-
 import com.elefante.backend.base.BaseEntity;
 import com.elefante.backend.util.CollectorIdentifierEnum;
 
@@ -37,9 +35,6 @@ public class AttendanceRecordEntity extends BaseEntity {
 	@Column(name = "collector_identifier", length = 2, nullable = false, updatable = false)
 	@Enumerated(EnumType.ORDINAL)
 	private CollectorIdentifierEnum collectorIdentifier = CollectorIdentifierEnum.BROWSER;
-
-	@Column(name = "coordinate", columnDefinition = "POINT", nullable = false, updatable = false)
-	private Point coordinate;
 
 	@Column(name = "nsr", unique = true, length = 9, nullable = false, updatable = false)
 	private String nsr;
