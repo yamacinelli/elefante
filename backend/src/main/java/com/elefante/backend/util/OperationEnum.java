@@ -1,4 +1,4 @@
-package com.elefante.backend.arpemployerevent;
+package com.elefante.backend.util;
 
 public enum OperationEnum {
 

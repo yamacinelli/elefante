@@ -1,6 +1,6 @@
 package com.elefante.backend.arptimerecordevent;
 
-public enum CollectorIdentifierEnum {
+public enum CollectorCodeEnum {
 
     MOBILE_APP("01"),
     BROWSER("02"),
@@ -8,7 +8,7 @@ public enum CollectorIdentifierEnum {
 
     private String value;
 
-    CollectorIdentifierEnum(String value) {
+    CollectorCodeEnum(String value) {
         this.value = value;
     }
 

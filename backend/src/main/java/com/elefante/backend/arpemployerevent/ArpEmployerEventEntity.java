@@ -41,6 +41,9 @@ public class ArpEmployerEventEntity extends BaseEntity {
     @Column(name = "address", nullable = false)
     private String address;
 
+    @Column(name = "operation", nullable = false, updatable = false)
+    private String operation;
+
     @Column(name = "cpf_responsible_data_manipulation", length = 11, nullable = false, updatable = false)
     private String cpfResponsibleDataManipulation;
 

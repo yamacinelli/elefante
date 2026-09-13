@@ -21,6 +21,9 @@ public class ArpTimeRecordEventEntity extends BaseEntity {
     @Column(name = "employee_cpf", length = 11, nullable = false, updatable = false)
     private String employeeCpf;
 
+    @Column(name = "collector_code", length = 2, nullable = false, updatable = false)
+    private String collectorCode;
+
     @Builder.Default
     @Column(name = "time_record_connection", nullable = false, updatable = false)
     private Integer timeRecordConnection = 0;

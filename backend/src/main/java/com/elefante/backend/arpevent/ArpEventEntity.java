@@ -30,8 +30,8 @@ public class ArpEventEntity extends BaseEntity {
     @Column(name = "record_code", nullable = false, updatable = false)
     private Integer recordCode;
 
-    @Column(name = "occurred_at", nullable = false, updatable = false)
-	private Instant occurredAt;
+    @Column(name = "recorded_at", nullable = false, updatable = false)
+	private Instant recordedAt;
 
 	@Column(name = "persisted_at", nullable = false, updatable = false)
 	private Instant persistedAt;
