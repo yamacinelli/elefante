@@ -20,7 +20,7 @@ import lombok.experimental.SuperBuilder;
 @Table(name = "job")
 public class JobEntity extends BaseEntity {
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", length = 52, nullable = false)
     private String name;
 
     @Builder.Default

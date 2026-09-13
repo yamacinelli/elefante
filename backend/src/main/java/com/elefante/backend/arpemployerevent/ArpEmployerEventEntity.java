@@ -1,4 +1,4 @@
-package com.elefante.backend.employer;
+package com.elefante.backend.arpemployerevent;
 
 import com.elefante.backend.base.BaseEntity;
 import com.elefante.backend.util.DocumentTypeEnum;
@@ -19,8 +19,8 @@ import lombok.experimental.SuperBuilder;
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @Entity
-@Table(name = "employer")
-public class EmployerEntity extends BaseEntity {
+@Table(name = "arp_employer_event")
+public class ArpEmployerEventEntity extends BaseEntity {
 
     @Column(name = "legal_name", nullable = false)
     private String legalName;
@@ -40,4 +40,10 @@ public class EmployerEntity extends BaseEntity {
 
     @Column(name = "address", nullable = false)
     private String address;
+
+    @Column(name = "cpf_responsible_data_manipulation", length = 11, nullable = false, updatable = false)
+    private String cpfResponsibleDataManipulation;
+
+    @Column(name = "arp_event_id", nullable = false, updatable = false)
+    private Integer arpEventId;
 }

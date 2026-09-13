@@ -22,10 +22,10 @@ import lombok.experimental.SuperBuilder;
 @Table(name = "employee")
 public class EmployeeEntity extends BaseEntity {
 
-    @Column(name = "name", nullable = false, updatable = false)
+    @Column(name = "name", length = 52, nullable = false)
     private String name;
 
-    @Column(name = "cpf", unique = true, length = 11, nullable = false, updatable = false)
+    @Column(name = "cpf", unique = true, length = 11, nullable = false)
     private String cpf;
 
     @Builder.Default
