@@ -27,8 +27,8 @@ public class SoftwareInfoEntity extends BaseEntity {
     @Column(name = "rep_type", nullable = false, updatable = false)
     private String repType = "REP-P";
 
-    @Column(name = "trademark", nullable = false, updatable = false)
-    private String trademark;
+    @Column(name = "inpi_register", length = 17, nullable = false, updatable = false)
+    private String inpiRegister;
 
     @Column(name = "name", nullable = false)
     private String name;

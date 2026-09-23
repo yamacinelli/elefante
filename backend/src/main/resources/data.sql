@@ -1,3 +1,6 @@
+INSERT INTO software_info (rep_type, inpi, name, version, document_type, document_number, developer_legal_name, developer_email)
+VALUES ("REP-P", "111111111", "Elefante", "0.0.1", "CNPJ", "YM17W4A3000197", "Elefante Software Solution", "admin@elefante.com.br");
+
 INSERT INTO user (email, password, is_first_access, role, is_enabled)
 VALUES ("admin_sp@monster.com.br", "$2a$10$C8vQ/lwF5q1jM1jtw6bSGePa0J5iFgHUDEC1Q/B0WoCtjU4QZ/KVS", FALSE, "ADMIN", TRUE);
 INSERT INTO user (email, password, is_first_access, role, is_enabled)
